@@ -46,6 +46,12 @@ AC_CHECK_HEADER(infiniband/umad.h, [],
 )
 fi
 
+AC_CHECK_HEADER(infiniband/common.h,
+	AC_MSG_ERROR([<infiniband/common.h> was found.
+        libibmad is now incompatible with libibcommon.
+        Please upgrade to a newer libibumad which does not require libibcommon])
+)
+
 dnl Checks for library functions
 AC_CHECK_FUNCS([memset strrchr strtol])
 
