@@ -1489,6 +1489,8 @@ MAD_EXPORT uint8_t *smp_set_status_via(void *data, ib_portid_t * portid,
 				       unsigned attrid, unsigned mod,
 				       unsigned timeout, int *rstatus,
 				       const struct ibmad_port *srcport);
+MAD_EXPORT void smp_mkey_set(uint64_t mkey);
+MAD_EXPORT uint64_t smp_mkey_get(void);
 
 /* cc.c */
 MAD_EXPORT void *cc_query_status_via(void *rcvbuf, ib_portid_t * portid,
