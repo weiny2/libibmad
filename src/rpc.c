@@ -135,7 +135,8 @@ _do_madrpc(int port_id, void *sndbuf, void *rcvbuf, int agentid, int len,
 
 	if (ibdebug > 1) {
 		IBWARN(">>> sending: len %d pktsz %zu", len, umad_size() + len);
-		xdump(stderr, "send buf\n", sndbuf, umad_size() + len);
+		xdump(stderr, "send umad buf\n", sndbuf, umad_size() + len);
+		xdump(stderr, "mad buf\n", umad_get_mad(sndbuf), len);
 	}
 
 	if (save_mad) {
@@ -227,6 +228,7 @@ void *mad_rpc(const struct ibmad_port *port, ib_rpc_t * rpc,
 		if ((len = mad_build_pkt(sndbuf, rpc, dport, 0, payload)) < 0)
 			return NULL;
 
+		memset(rcvbuf, 0, 1024);
 		if ((len = _do_madrpc(port->port_id, sndbuf, rcvbuf,
 				      port->class_agents[rpc->mgtclass & 0xff],
 				      len, mad_get_timeout(port, rpc->timeout),

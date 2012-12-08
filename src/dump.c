@@ -1123,6 +1123,7 @@ void xdump(FILE * file, char *msg, void *p, int size)
 	if (msg)
 		fputs(msg, file);
 
+	fprintf(file, "%04d %06d: ", 0, 0);
 	for (i = 0; i < size;) {
 		fputc(HEX(*cp >> 4), file);
 		fputc(HEX(*cp & 0xf), file);
@@ -1132,8 +1133,10 @@ void xdump(FILE * file, char *msg, void *p, int size)
 		fputc(HEX(cp[1] & 0xf), file);
 		if ((++i) % 16)
 			fputc(' ', file);
-		else
+		else {
 			fputc('\n', file);
+			fprintf(file, "%04d %06d: ", i, i*8);
+		}
 		cp += 2;
 	}
 	if (i % 16)

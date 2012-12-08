@@ -79,6 +79,7 @@ uint8_t *pma_query_via(void *rcvbuf, ib_portid_t * dest, int port,
 	if (!dest->qkey)
 		dest->qkey = IB_DEFAULT_QP1_QKEY;
 
+xdump(stdout, "rcvbuf:\n", rcvbuf, 256);
 	p_ret = mad_rpc(srcport, rpcold, dest, rcvbuf, rcvbuf);
 	errno = rpc.error;
 	return p_ret;

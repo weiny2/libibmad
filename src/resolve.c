@@ -101,6 +101,7 @@ int ib_resolve_guid_via(ib_portid_t * portid, uint64_t * guid,
 	uint64_t selfguid, prefix;
 	ibmad_gid_t selfgid;
 	uint8_t nodeinfo[64];
+printf("got to here\n");
 
 	if (!sm_id) {
 		sm_id = &sm_portid;
@@ -126,6 +127,7 @@ int ib_resolve_guid_via(ib_portid_t * portid, uint64_t * guid,
 		return -1;
 
 	mad_decode_field(buf, IB_SA_PR_SL_F, &portid->sl);
+xdump(stderr, "PR mad data\n", buf, IB_SA_DATA_SIZE);
 	return 0;
 }
 
